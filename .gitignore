@@ -1,0 +1,9 @@
+smex-items
+elpa/*
+auto-save-list/*
+backup/*
+eshell/*
+recentf
+package-quickstart.el
+server/*
+transient/*
