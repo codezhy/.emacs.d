@@ -7,3 +7,4 @@ recentf
 package-quickstart.el
 server/*
 transient/*
+eln-cache/*

@@ -8,15 +8,13 @@
   (package-refresh-contents))
 
 
-(require 'use-package-ensure)
-(setq use-package-always-ensure t)
-
 ;; Setup `use-package'
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 
-
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
 
 (use-package gcmh
 	     :init
@@ -28,12 +26,13 @@
 			 ("C-n" . company-select-next)
 			 ("C-p" . company-select-previous)))
 
-(use-package wgrep)
+(use-package wgrep
+  :config
+    (setq wgrep-auto-save-buffer t))
 
 (use-package winum
 	     :config
 	     (winum-mode))
-
 
 (use-package yasnippet
 	     :defer 0.1
@@ -43,6 +42,7 @@
 	     :config
 	     (yas-reload-all)
 	     :hook
+	     (prog-mode . yas-minor-mode)
 	     (org-mode   . yas-minor-mode)
 	     (erlang-mode  . yas-minor-mode)
 	     (rust-mode  . yas-minor-mode))
@@ -60,7 +60,21 @@
 	     (add-hook 'markdown-mode-hook 'turn-on-smartparens-strict-mode)
 	     (show-smartparens-global-mode t))
 
+
 (use-package consult)
+
+(use-package embark
+  :after consult
+    :config
+    (global-set-key (kbd "C-;") 'embark-act)
+    (setq prefix-help-command 'embark-prefix-help-command))
+
+(use-package embark-consult
+  :after embark
+  :config
+  :hook
+  (embark-collect-mode-hook . consult-preview-at-point-mode))
+
 
 (use-package vertico
   :config
@@ -99,5 +113,11 @@
 (use-package evil-nerd-commenter)
 (use-package expand-region)
 
+(use-package monokai-theme
+  :config
+  (load-theme 'monokai 1))
+
+(use-package doom-modeline
+      :hook (after-init . doom-modeline-init))
 
 (provide 'init-package)
