@@ -27,7 +27,7 @@
 			 ("C-p" . company-select-previous)))
 
 (use-package wgrep
-  :config
+    :config
     (setq wgrep-auto-save-buffer t))
 
 (use-package winum

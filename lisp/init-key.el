@@ -21,4 +21,6 @@
     "xs" 'save-file 
     "w" 'save-buffer))
 
+(define-key minibuffer-local-map (kbd "C-c C-e") 'embark-export)
+
 (provide 'init-key)
